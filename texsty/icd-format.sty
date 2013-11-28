@@ -1,0 +1,126 @@
+\def\pfsicdhead{Prime Focus Spectrograph Project Interface Control Document}
+\def\pfsicdnum{00000}
+\def\pfsicdrev{000}
+\def\pfsicdtitle{}
+\def\pfsicdcat{}
+\def\pfsicdits{---}
+\def\pfsicdref{(none)}
+\def\pfsicdattach{(none)}
+\def\pfsicdr{Not yet Reviewed and Approved}
+\def\pfsicdsr{Not yet Super Approved}
+\def\pfsicdcr{No Change Record}
+
+\def\ICDID#1{\renewcommand{\pfsicdnum}{#1}}
+\def\ICDREV#1{\renewcommand{\pfsicdrev}{#1}}
+\def\ICDCATEGORY#1{\renewcommand{\pfsicdcat}{#1}}
+\def\ICDITSIDS#1{\renewcommand{\pfsicdits}{#1}}
+\def\ICDApproval#1{\renewcommand{\pfsicdr}{#1}}
+\def\ICDSuperApproval#1{\renewcommand{\pfsicdsr}{#1}}
+\def\ICDChangeRecord#1{\renewcommand{\pfsicdcr}{#1}}
+\def\ICDReference#1{\renewcommand{\pfsicdref}{#1}}
+\def\ICDAttachment#1{\renewcommand{\pfsicdattach}{#1}}
+\def\pfsicdid{ICD--\pfsicdnum--\pfsicdrev\ifdraft + \fi}
+
+\usepackage{pfsstyle}
+
+% copied from article.cls, modifying
+\renewcommand\maketitle{\par
+  \begingroup
+    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+    \long\def\@makefntext##1{\parindent 1em\noindent
+            \hb@xt@1.8em{%
+                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+    \global\@topnum\z@   % Prevents figures from going at top of page.
+    \par
+    \vskip 3em%
+    \begin{center}%
+      \ifdraft
+        {\LARGE [DRAFT]}
+      \fi
+      \vskip 1.5em%
+      \let \footnote \thanks
+      {\LARGE \@title \par}%
+      \vskip 1.5em%
+      {\large
+        \lineskip .5em%
+        \begin{tabular}[t]{c}%
+          \@author
+        \end{tabular}\par}%
+      \vskip 1em%
+      {\large \@date}%
+    \end{center}%
+    \par
+    \vskip 1.5em
+  \endgroup
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+
+% main body for ICD header
+\newcommand{\icdhead}[0]{\par
+  \let\pfsicdtitle\@title
+  \def\@evenhead{}
+  \def\@oddhead {}
+  \pagestyle{empty}
+  {\hfill {\bf \large \pfsicdhead}}
+  \vskip 3em
+  {\hfill \pfsicdid}
+  \vskip 4em
+  \begin{center}
+    \ifdraft
+      {\Large [DRAFT]}
+      \vskip 1em
+    \fi
+    {\Large \@title}
+  \end{center}
+  \vskip 4em
+  {\large
+  \begingroup
+    \renewcommand{\arraystretch}{1.3}
+    \begin{center}
+      \begin{tabular}[t]{|p{8em}|p{28em}|}
+        \hline
+        ICD ID & \pfsicdnum \\[3pt] \hline
+        Version & \pfsicdrev\ifdraft + \fi \\[3pt] \hline
+        Date & \@date \\[3pt] \hline
+        Category & \pfsicdcat \\[3pt] \hline
+        Title & \pfsicdtitle \\[3pt] \hline
+        Discussed & at ITS ID \pfsicdits \\[3pt] \hline
+        Approval by & \shortstack[l]{\pfsicdr} \\[3pt] \hline
+        Super Approval & \shortstack[l]{\pfsicdsr} \\[3pt] \hline
+        Change Record & \shortstack[l]{\pfsicdcr} \\[3pt] \hline
+        Reference & \shortstack[l]{\pfsicdref} \\[3pt] \hline
+        Attachment & \shortstack[l]{\pfsicdattach} \\[3pt] \hline
+      \end{tabular}
+    \end{center}
+  \endgroup
+  }
+  \clearpage
+  \setcounter{page}{1}
+  \ifdraft
+    \def\@evenhead{\underline{
+        \hbox to\textwidth{\thepage\hfil DRAFT \hfil (\pfsicdid) \pfsicdtitle}}}
+    \def\@oddhead {\underline{
+        \hbox to\textwidth{(\pfsicdid) \pfsicdtitle\hfil DRAFT \hfil\thepage}}}
+  \else
+    \def\@evenhead{\underline{
+        \hbox to\textwidth{\thepage\hfil\pfsicdtitle}}}
+    \def\@oddhead {\underline{
+        \hbox to\textwidth{\pfsicdtitle\hfil\thepage}}}
+  \fi
+  \@titlepagefalse
+  \maketitle
+  \tableofcontents
+}
+

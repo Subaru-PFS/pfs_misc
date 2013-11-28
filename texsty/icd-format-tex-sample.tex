@@ -1,0 +1,104 @@
+\documentclass[a4paper,notitlepage]{article}
+\usepackage{icd-format}
+\drafttrue
+\title{Usage and Sample for PFS ICD LaTeX style}
+\author{PFS Project Office}
+\begin{document}
+
+\ICDID{00000}
+\ICDREV{000}
+\ICDCATEGORY{ALL}
+\ICDITSIDS{}  % comma separated ID numbers, eg. 1,2,3
+
+\ICDApproval{
+    XXXXXXXX (XXXX--XX--XX) \\
+    XXXXXXXX (XXXX--XX--XX) \\
+    XXXXXXXX (XXXX--XX--XX)
+}
+\ICDSuperApproval{XXXXXXXX (XXXX--XX--XX)}
+\ICDChangeRecord{Rev.001 / First Release / 2012--07--20}
+\ICDReference{(none); if any put ICD ID here}
+\ICDAttachment{(none); if any put 22char file id of document server}
+
+\icdhead
+
+\section{Abstract}
+
+This document covers usage and sample to use icd--format.tex style file. 
+Also you can copy source for this sample as a template. 
+
+
+\section{\LaTeX\ header}
+
+You need to put some commands at the beginning of your \LaTeX\ source file. 
+
+\begin{verbatim}
+\documentclass[a4paper,notitlepage]{article}
+\usepackage{icd-format}
+\drafttrue
+\title{Usage and Sample for PFS ICD LaTeX style}
+\author{PFS Project Office}
+\begin{document}
+
+\ICDID{00000}
+\ICDREV{000}
+\ICDCATEGORY{ALL}
+\ICDITSIDS{}  % comma separated ID numbers, eg. 1,2,3
+\ICDApproval{
+    XXXXXXXX (XXXX--XX--XX) \\
+    XXXXXXXX (XXXX--XX--XX) \\
+    XXXXXXXX (XXXX--XX--XX)
+}
+\ICDSuperApproval{XXXXXXXX (XXXX--XX--XX)}
+\ICDChangeRecord{Rev.001 / First Release / 2012--07--20}
+\ICDReference{(none); if any put ICD ID here}
+\ICDAttachment{(none); if any put 22char file id of document server}
+
+\icdhead
+\end{verbatim}
+
+Each command means: 
+
+\begin{description}
+  \item[drafttrue] If the ICD document is draft, insert this line. 
+  \item[ICDID] ID for the ICD, if it is a draft for the first revision, input 
+    '00000'.
+  \item[ICDREV] Revision number for the ICD document, keep this as the latest 
+    issued revision number (or '000' if new one). 
+    Including {\tt \textbackslash drafttrue} will add '+' after this revision number.
+  \item[ICDITSIDS] Related ITS issue \#, with comma separated, like 
+    '1,2,3'.
+  \item[ICDApproval] Approval record for the last revision of the ICD.
+    If draft, keep this blank. Use format of 'Name (YYYY--MM--DD)'. 
+    You can use '\textbackslash\textbackslash' for multi-line.
+  \item[ICDSuperApproval] Super approval record for the last revision of the 
+    ICD.
+    If draft, keep this blank. Use format of 'Name (YYYY--MM--DD)'. 
+    You can use '\textbackslash\textbackslash' for multi-line.
+  \item[ICDChangeRecord] Change record from the first revision. At least, you 
+    need to include revision number, release short description, and release 
+    date. 
+    You can use '\textbackslash\textbackslash' for multi-line.
+  \item[ICDReference] Related ICD issue ID, which any related discussions for 
+    the latest release was held. 
+    If draft, include the current on-going ITS issue ID. 
+  \item[ICDAttachment] Related document ID in the document server (22char, 
+    not document ID in numberic). 
+    Any file related to the (latest revision of) ICD should be included. 
+\end{description}
+
+Also, you need to input {\tt \textbackslash icdhead} just before your content, 
+and you don't need to include {\tt \textbackslash maketitle} or {\tt 
+\textbackslash tableofcontents}. 
+
+
+\section{Building document}
+
+You need {\bf pdflatex} to build document. 
+Also place {\tt icd--format.sty} and {\tt pfsstyle.sty} files into the same 
+directory of \LaTeX\ source file or {\tt TEXMF} directory 
+(like {\tt \$\{HOME\}/texmf/tex/latex/}). 
+
+
+\end{document}
+

@@ -1,0 +1,122 @@
+\def\pfsssnhead{Prime Focus Spectrograph Project Software Team Study Note}
+\def\pfsssnnum{00000}
+\def\pfsssnrev{000}
+\def\pfsssntitle{}
+\def\pfsssncat{}
+\def\pfsssnref{(none)}
+\def\pfsssnattach{(none)}
+\def\pfsssncr{No Change Record}
+\def\pfsssncmt{}
+
+\def\SSNID#1{\renewcommand{\pfsssnnum}{#1}}
+\def\SSNREV#1{\renewcommand{\pfsssnrev}{#1}}
+\def\SSNCATEGORY#1{\renewcommand{\pfsssncat}{#1}}
+\def\SSNChangeRecord#1{\renewcommand{\pfsssncr}{#1}}
+\def\SSNWritten#1{\author{#1}}
+\def\SSNReference#1{\renewcommand{\pfsssnref}{#1}}
+\def\SSNAttachment#1{\renewcommand{\pfsssnattach}{#1}}
+\def\SSNComment#1{\renewcommand{\pfsssncmt}{#1}}
+\def\pfsssnid{SSN--\pfsssnnum--\pfsssnrev\ifdraft + \fi}
+
+\usepackage{pfsstyle}
+
+% copied from article.cls, modifying
+\renewcommand\maketitle{\par
+  \begingroup
+    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+    \long\def\@makefntext##1{\parindent 1em\noindent
+            \hb@xt@1.8em{%
+                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+    \global\@topnum\z@   % Prevents figures from going at top of page.
+    \begin{center}%
+      \par
+      \vskip 3em%
+      \ifdraft
+        {\LARGE [DRAFT]}
+      \fi
+      \vskip 1.5em%
+      \let \footnote \thanks
+      {\LARGE \@title \par}%
+      \vskip 1.5em%
+      {\large
+        \lineskip .5em%
+        \begin{tabular}[t]{c}%
+          \@author
+        \end{tabular}\par}%
+      \vskip 1em%
+      {\large \@date}%
+    \end{center}%
+    \par
+    \vskip 1.5em
+  \endgroup
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+
+% main body for SSN header
+\newcommand{\ssnhead}[0]{\par
+  \let\pfsssntitle\@title
+  \def\@evenhead{}
+  \def\@oddhead {}
+  \pagestyle{empty}
+  {\hfill {\bf \large \pfsssnhead}}
+  \vskip 3em
+  {\hfill \pfsssnid}
+  \vskip 4em
+  \begin{center}
+    \ifdraft
+      {\Large [DRAFT]}
+      \vskip 1em
+    \fi
+    {\Large \@title}
+  \end{center}
+  \vskip 4em
+  {\large
+  \begingroup
+    \renewcommand{\arraystretch}{1.3}
+    \begin{center}
+      \begin{tabular}[t]{|p{8em}|p{28em}|}
+        \hline
+        SSN ID & \pfsssnnum \\[3pt] \hline
+        Version & \pfsssnrev\ifdraft + \fi \\[3pt] \hline
+        Date & \@date \\[3pt] \hline
+        Category & \pfsssncat \\[3pt] \hline
+        Title & \pfsssntitle \\[3pt] \hline
+        Written by & \shortstack[l]{\@author} \\[3pt] \hline
+        Change Record & \shortstack[l]{\pfsssncr} \\[3pt] \hline
+        Reference & \shortstack[l]{\pfsssnref} \\[3pt] \hline
+        Attachment & \shortstack[l]{\pfsssnattach} \\[3pt] \hline
+        Comment & \pfsssncmt \\[3pt] \hline
+      \end{tabular}
+    \end{center}
+  \endgroup
+  }
+  \clearpage
+  \setcounter{page}{1}
+  \ifdraft
+    \def\@evenhead{\underline{
+        \hbox to\textwidth{\thepage\hfil DRAFT \hfil (\pfsssnid) \pfsssntitle}}}
+    \def\@oddhead {\underline{
+        \hbox to\textwidth{(\pfsssnid) \pfsssntitle\hfil DRAFT \hfil\thepage}}}
+  \else
+    \def\@evenhead{\underline{
+        \hbox to\textwidth{\thepage\hfil\pfsssntitle}}}
+    \def\@oddhead {\underline{
+        \hbox to\textwidth{\pfsssntitle\hfil\thepage}}}
+  \fi
+  \@titlepagefalse
+  \maketitle
+  \tableofcontents
+}
+

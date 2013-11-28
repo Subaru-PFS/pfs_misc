@@ -1,0 +1,611 @@
+\usepackage{ifpdf}
+\ifpdf
+\else
+  \errmessage{'pdf(la)tex' is required for using full features of pfsstyle.sty.}
+\fi
+
+\pdfimageresolution=600
+
+%\renewcommand\floatpagefraction{.95}
+%\renewcommand\topfraction{.95}
+%\renewcommand\bottomfraction{.95}
+\renewcommand{\textfraction}{.01}
+
+\setcounter{topnumber}{10}
+\setcounter{bottomnumber}{10}
+\setcounter{totalnumber}{20}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% paper size
+
+%\setlength\hoffset           {-10.4mm} % 15mm offset by *sidemargin
+%\setlength\voffset           {-10.4mm} % 15mm offset by topmargin
+
+%\setlength\columnsep         {}        %% NO CHANGE
+\setlength\oddsidemargin     {0.0mm}
+\setlength\evensidemargin    {\oddsidemargin}
+\setlength\footskip          {7.5mm}
+\setlength\headheight        {10.4mm}
+\setlength\headsep           {4.0mm}
+\setlength\topmargin         {-10.4mm}
+%\setlength\marginparpush     {}     %% NO CHANGE
+\setlength\marginparsep      {0.0mm}
+\setlength\marginparwidth    {0.0mm}
+
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-2in}
+\addtolength{\textwidth}{\marginparsep}
+\addtolength{\textwidth}{\marginparwidth}
+
+\addtolength{\evensidemargin}{-15pt}
+\addtolength{\textwidth}{15pt}
+
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-1.6in}
+\addtolength{\textheight}{-\topmargin}
+\addtolength{\textheight}{-\headheight}
+\addtolength{\textheight}{-\headsep}
+\addtolength{\textheight}{-\footskip}
+
+% Definition for included image (max width = 0.9 of text width)
+\newlength\imgmaxwidth
+\setlength\imgmaxwidth       {0.9\textwidth}
+
+\setcounter{secnumdepth}{4}
+%\renewcommand{\thefigure}{\thesection-\@arabic\c@figure}
+%\@addtoreset{figure}{section}
+
+\def\@evenhead{\underline{\hbox to\textwidth{\thepage\hfil\leftmark}}}
+\def\@oddhead {\underline{\hbox to\textwidth{\rightmark\hfil\thepage}}}
+
+\usepackage{textcomp}
+\usepackage{tabularx}
+\newcolumntype{x}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{amssymb}
+%\usepackage{ascmac}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{array}
+%\usepackage{rsfs}
+%\usepackage{here}
+\usepackage{float}
+\usepackage{lscape}
+\usepackage{longtable}
+\usepackage{url}
+%\usepackage[square,sort,compress]{natbib}
+\usepackage[square,sort]{natbib}
+\usepackage{colortbl}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{hhline}
+\usepackage{txfonts}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+
+\usepackage{slashbox}
+\usepackage{threeparttable}
+
+\usepackage{chapterbib}
+%\bibstyle{plain}
+\bibliographystyle{SciBook}
+\newcommand{\chapbibliography}[1]{%
+  \bibliographystyle{SciBook}
+  \bibliography{#1}
+}
+
+\usepackage{xspace}
+% Cause problem on caption
+%\usepackage{deluxetable}
+
+
+% create a new boolean to enable/disable draft-copy settings
+\newif\ifdraft
+\draftfalse
+
+
+%%% For pdftex
+\ifpdf
+  \usepackage[pdftex]{graphicx}
+  \usepackage{epstopdf}
+  \usepackage{color}
+  \usepackage[pdftex,colorlinks=true,linkcolor=blue,citecolor=blue,filecolor=blue,urlcolor=blue,bookmarks=true,bookmarksnumbered=true,]{hyperref}
+  \DeclareGraphicsRule{.PNG}{png}{*}{}
+  \DeclareGraphicsRule{.JPEG}{jpg}{*}{}
+  \DeclareGraphicsRule{.JPG}{jpg}{*}{}
+  \DeclareGraphicsRule{.jpeg}{jpg}{*}{}
+\else
+  \usepackage{graphics}
+  \usepackage{graphicx}
+  \usepackage[dvips,dvipsnames,usenames]{color}
+  \usepackage[dvipdfm,colorlinks=true,linkcolor=blue,citecolor=blue,filecolor=blue,urlcolor=blue,bookmarks=true,bookmarksnumbered=true,]{hyperref}
+\fi
+
+\usepackage{epsfig}
+\usepackage{wrapfig}
+\usepackage{rotating}
+
+%% Issue #6
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {3.5ex \@plus 1ex \@minus .2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\Large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {3.25ex\@plus 1ex \@minus .2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\large\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {3.25ex\@plus 1ex \@minus .2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+
+\def\degree{\ensuremath{{}^{\text{o}}}}
+\def\arcmin{\ensuremath{'}}
+\def\arcsec{\ensuremath{"}}
+\def\tbd{\text{\textbf{TBD\ }}}
+%\newcommand\tbd[1]{\textbf{\color{red}(#1)}}
+%\newcommand{\tbd}[1]{{\bfseries XXX: #1.}}
+\def\vec#1{\ensuremath{\mathbf{#1}}}
+\def\const{\ensuremath{\text{const}}}
+\def\mathdash{\text{---}}
+
+\ifdefined\l@part
+  \renewcommand*\l@part{\@dottedtocline{1}{0em}{2.0em}}
+\fi
+\ifdefined\l@chapter
+  \renewcommand*\l@chapter{\@dottedtocline{1}{0em}{2.0em}}
+\fi
+\renewcommand*\l@section{\@dottedtocline{1}{0em}{3.0em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{3.0em}{2.8em}}
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{5.8em}{3.2em}}
+%\renewcommand*\l@section{\@dottedtocline{1}{0em}{3.0em}}
+%\renewcommand*\l@subsection{\@dottedtocline{2}{3.0em}{2.8em}}
+%\renewcommand*\l@subsubsection{\@dottedtocline{3}{5.8em}{3.2em}}
+
+%\setlength\parskip{0.5\baselineskip \@plus 0.5\baselineskip}
+%\setlength\parindent{0mm}
+%\setlength\listparindent{0mm}
+%\setlength\itemsep{-0.5\baselineskip}
+%\setlength\parsep{0.5\baselineskip}
+%\setlength\topsep{0mm}
+%\setlength\partopsep{0mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MACROS
+% Markup:
+\def\XX{{\bf XX}\;}
+
+% General purpose usefulness:
+\def\eg{{e.g.}\xspace}
+\def\ie{{i.e.}\xspace}
+\def\etc{{etc}\xspace}
+\newcommand{\etal}{et al.}
+\newcommand{\rmd}{\mathrm{d}}
+
+% Journal definitions for bibtex:
+\def\jnl#1{{\it#1\/}}
+\def\apj{\jnl{ApJ}}
+\def\apjl{\jnl{ApJL}}
+\def\apjs{\jnl{ApJS}}
+\def\aj{\jnl{AJ}}
+\def\apss{\jnl{Ap\&SS}}
+\def\mnras{\jnl{MNRAS}}
+\def\aap{\jnl{A\&A}}
+\def\aaps{\jnl{A\&AS}}
+\def\nat{\jnl{Nature}}
+\def\physrep{\jnl{Phys. Rep.}}
+\def\araa{\jnl{ARAA}}
+\def\prd{\jnl{Phys.\ Rev.\ D}}
+\def\pasp{\jnl{PASP}}
+\def\pasj{\jnl{PASJ}}
+\def\aaps{\jnl{A\&AS}}
+\def\an{\jnl{AN}}
+\def\jcap{\jnl{JCAP}}
+\def\memsai{\jnl{Mem. Soc. Astron. Ital.}}
+
+% Math macros:
+\def\ltsim{\lesssim}  
+\def\gtsim{\gtrsim}
+\def\lessim{\lesssim} 
+\newcommand{\bit}[1]{\mbox{\textbf{\emph{#1}}}} % bold italic
+
+% Cosmology:
+\def\Om{\ensuremath{\Omega_{\rm m}}}
+\def\Ob{\ensuremath{\Omega_{\rm b}}}
+\def\OL{\ensuremath{\Omega_{\Lambda}}}
+\def\Ok{\ensuremath{\Omega_{\rm k}}}
+\def\om{\ensuremath{\omega_{\rm m}}}
+\def\ob{\ensuremath{\omega_{\rm b}}}
+\def\w0{\ensuremath{w_0}}
+\def\wa{\ensuremath{w_{\rm a}}}
+\def\lcdm{$\Lambda$CDM}
+\def\wcdm{$w$CDM}
+
+% Astronomy:
+\def\arcsec{''}
+\def\kms{\ensuremath{{\rm km s}^{-1}}}
+\def\hgpcq{\mbox{$h^{-3}$Gpc$^3$}}
+\def\hmpcq{\mbox{$h^{-3}$Mpc$^3$}}
+\def\hmpc{\mbox{$h^{-1}$Mpc}}
+\def\hmpci{\mbox{$h$\,Mpc$^{-1}$}}
+\def\mpc{\mbox{Mpc}}
+\def\mpci{\mbox{Mpc$^{-1}$}}
+%\def\phz{{photo-\emph{z}}}
+%\def\Phz{{Photo-\emph{z}}}
+\def\phz{{photometric redshift}}
+\def\Phz{{Photometric redshift}}
+\def\zp{z_{\rm p}}
+
+% Statistics/inference:
+\newcommand{\pr}{\textrm{\rm Pr\,}}
+\newcommand{\Data}{\textrm{\,data\,}}
+\newcommand{\Model}{\textrm{\,model\,}}
+\newcommand{\Pars}{\{\theta\}}
+\newcommand{\datav}{\mathbf{d}}
+\newcommand{\modelv}{\mathbf{H}}
+\newcommand{\parsv}{\boldsymbol{\theta}}
+\newcommand{\datum}{\mathnormal{d}}
+\newcommand{\model}{\mathnormal{h}}
+\newcommand{\param}{\theta}
+\newcommand{\covmat}{\mathsf{C}}
+
+% Strong Lensing:
+\def\zd{z_{\rm l}}
+\def\zs{z_{\rm s}}
+\def\Dd{D_{\rm l}}
+\def\Ds{D_{\rm s}}
+\def\Dds{D_{\rm ls}}
+\def\kappax{\kappa_{\rm ext}}
+\def\thetaE{\theta_{\rm E}}
+\def\bsixteenoeight{B1608$+$656}
+\def\rxjthirteenfortyseven{RX~J1347$-$1145}
+\def\bulletcluster{1E0657$-$56}
+\def\babybullet{MACS~J0025.4$-$1222}
+\def\babybulletii{MACS~J2243.3$-$--0935}
+
+%\newcommand{\rmd}{\ensuremath{\mathrm{d}}}
+\newcommand{\bmf}[1]{\mbox{{\it \boldmath$#1$}}}
+%\newcommand{\bm}[1]{\mbox{{\it \boldmath$#1$}}}
+%\def\ltsima{$\; \buildrel < \over \sim \;$}
+%\def\lsim{\lower.5ex\hbox{\ltsima}}
+%\def\gtsima{$\; \buildrel > \over \sim \;$}
+%\def\gsim{\lower.5ex\hbox{\gtsima}}
+%\def\bi#1{\bbox{#1}}
+\def\bi#1{\hbox{\boldmath{$#1$}}} 
+\def\b{$\circ$\quad}
+\newcommand{\ave}[1]{\langle{#1}\rangle}
+\newcommand{\simgt}{\lower.5ex\hbox{$\; \buildrel > \over \sim \;$}}
+\newcommand{\simlt}{\lower.5ex\hbox{$\; \buildrel < \over \sim \;$}}
+\newcommand{\oii}{{[{\sc O\,ii}]}}
+\newcommand{\micron}{\mu}
+
+\newcommand{\mt}[1]{{\textcolor{blue}{{#1}}}}
+
+% My latex definitions
+\newcommand{\aox}{\ensuremath{\alpha_{\mathrm{ox}}}}
+\newcommand{\caii}{\ion{Ca}{2}}
+\newcommand{\cat}{CaT}
+\newcommand{\chk}{Ca~H+K}
+\newcommand{\chisq}{\ensuremath{\chi^2}}
+\newcommand{\chisqr}{\ensuremath{\chi^2_r}}
+\newcommand{\chandra}{\emph{Chandra}}
+\newcommand{\ciii}{\ion{C}{3}]}
+\newcommand{\civ}{\ion{C}{4}}
+\newcommand{\ergs}{erg s\ensuremath{^{-1}}}
+%\newcommand{\etal}{et al.}
+\newcommand{\ebv}{\emph{E(B-V)}}
+\newcommand{\delm}{\ensuremath{\Delta M_\mathrm{BH}}}
+\newcommand{\delsig}{\ensuremath{\Delta \sigma}}
+\newcommand{\deltasigma}{\ensuremath{\delta \sigma_{\ast}}}
+\newcommand{\dn}{D\ensuremath{_n}(4000)}
+\newcommand{\dperp}{D{\ensuremath{_\perp}}}
+\newcommand{\epsi}{\ensuremath{\epsilon_0}}
+\newcommand{\flamb}{erg s$^{-1}$ cm$^{-2}$ \AA$^{-1}$}
+\newcommand{\flux}{erg s$^{-1}$ cm$^{-2}$}
+\newcommand{\fei}{\ion{Fe}{1}}
+\newcommand{\feii}{\ion{Fe}{2}}
+\newcommand{\feiii}{\ion{Fe}{3}}
+\def\fnu{erg s$^{-1}$ cm$^{-2}$ Hz$^{-1}$}
+\def\gtrsim{\mathrel{\hbox{\rlap{\hbox{\lower4pt\hbox{$\sim$}}}\hbox{\raise2pt\hbox{$>$}}}}}
+\newcommand{\fha}{\ensuremath{f_\mathrm{H{\alpha}}}}
+\newcommand{\fwha}{\ensuremath{\mathrm{FWHM}_\mathrm{H{\alpha}}}}
+\newcommand{\fwhb}{\ensuremath{\mathrm{FWHM}_\mathrm{H{\beta}}}}
+\newcommand{\fwoiii}{\ensuremath{\mathrm{FWHM}_\mathrm{[O {\tiny III}]}}}
+\newcommand{\fwoii}{\ensuremath{\mathrm{FWHM}_\mathrm{[O {\tiny II}]}}}
+\newcommand{\gams}{\ensuremath{\Gamma_{\mathrm{s}}}}
+\newcommand{\gamh}{\ensuremath{\Gamma_{\mathrm{s}}}}
+\newcommand{\gamhr}{\ensuremath{\Gamma_{\mathrm{HR}}}}
+\newcommand{\halpha}{H\ensuremath{\alpha}}
+\newcommand{\hii}{\ion{H}{2}}
+\newcommand{\hbeta}{H\ensuremath{\beta}}
+\newcommand{\hbetan}{H\ensuremath{\beta}_{\rm{n}}}
+\newcommand{\hd}{H\ensuremath{\delta_{\rm A}}}
+\newcommand{\hn}{\halpha+[\ion{N}{2}]}
+\newcommand{\hst}{\emph{HST}}
+\newcommand{\hub}{H\ensuremath{_0}}
+%\newcommand{\ij}{\ensuremath{I_J}}
+\newcommand{\inc}{\emph{i}}
+%\newcommand{\kms}{km~s\ensuremath{^{-1}}}
+\newcommand{\lam}[1]{\ensuremath{\lambda}#1}
+\newcommand{\lamlam}[2]{\ensuremath{\lambda\lambda}#1, #2}
+\newcommand{\ldelsig}{\ensuremath{\delta \sigma_{\ast}}}
+\newcommand{\lf}{\ensuremath{L_{\rm{5100 \AA}}}}
+\newcommand{\lsun}{$L_{\odot}$}
+\newcommand{\lum}{erg s$^{-1}$}
+\newcommand{\lya}{Ly \ensuremath{\alpha}}
+\newcommand{\ledd}{\ensuremath{L\mathrm{_{Edd}}}}
+\newcommand{\lledd}{\ensuremath{L_{\mathrm{bol}}/L{\mathrm{_{Edd}}}}}
+\newcommand{\lleddx}{\ensuremath{L_{\mathrm{1~\rm{keV}}}/L{\mathrm{_{Edd}}}}}
+\newcommand{\lbol}{\ensuremath{L_{\mathrm{bol}}}}
+\newcommand{\lbulge}{\ensuremath{L_{\mathrm{bulge}}}}
+\newcommand{\loiii}{\ensuremath{L_{\mathrm{[O {\tiny III}]}}}}
+\newcommand{\lha}{\ensuremath{L_{\mathrm{H{\alpha}}}}}
+\newcommand{\lhb}{\ensuremath{L_{\mathrm{H{\beta}}}}}
+\newcommand{\luv}{\ensuremath{L_{\rm{2500 \AA}}}}
+\newcommand{\lx}{\ensuremath{L_{\mathrm{X}}}}
+\newcommand{\mbulge}{\ensuremath{M_\mathrm{BH}-L_{\mathrm{bulge}}}}
+\newcommand{\mdot}{\ensuremath{\dot{m}}}
+\newcommand{\ml}{\ensuremath{\Upsilon}}
+\newcommand{\mli}{\ensuremath{\Upsilon_I}}
+\newcommand{\mlsun}{\ensuremath{\Upsilon_\odot}}
+\newcommand{\mbh}{\ensuremath{M_\mathrm{BH}}}
+\newcommand{\meansig}{\ensuremath{\langle \sigma_{\rm
+g}/\sigma_{\ast} \rangle}}
+\newcommand{\mgb}{\ion{Mg}{1}$b$}
+\newcommand{\mgii}{\ion{Mg}{2}}
+\newcommand{\mlb}{\ensuremath{M_{\mathrm{BH}}-L_{\mathrm{bulge}}}}
+\newcommand{\mgal}{\ensuremath{M_{\mathrm{BH}}-M_{\mathrm{bulge}}}}
+\newcommand{\msigma}{\ensuremath{M_{\mathrm{BH}}-\sigmastar}}
+\newcommand{\msun}{\ensuremath{M_{\odot}}}
+%\newcommand{\mpc}{$\mathrm{Mpc^{-1}}$}
+\newcommand{\nh}{\ensuremath{N_{\mathrm{H}}}}
+\newcommand{\nhcm}{$\mathrm{N_{H}~cm^{-3}}$}
+\newcommand{\nii}{[\ion{N}{2}]}
+%\newcommand{\oii}{[\ion{O}{2}]}
+%\newcommand{\oiii}{[{O}{\small III}]}
+\newcommand{\oiii}{{[{\sc O\,iii}]}}
+\newcommand{\per}{\ensuremath{^{-1}}}
+\newcommand{\persq}{\ensuremath{^{-2}}}
+\newcommand{\percu}{\ensuremath{^{-3}}}
+\newcommand{\percucm}{cm\ensuremath{^{-3}}}
+\newcommand{\pal}{Pa\ensuremath{\alpha}}
+\def\point#1{{\par\noindent $\bullet$ \hangindent=1em\hangafter=1 #1\par}}
+\def\pp{\parshape 2 0truein 6.7truein .3truein 5.5truein}
+\newcommand{\psix}{\ensuremath{P_{\mathrm{6cm}}}}
+\newcommand{\re}{\ensuremath{r_{\mathrm e}}}
+\newcommand{\rosat}{\emph{ROSAT}}
+\newcommand{\rhalf}{\ensuremath{r_{1/2}}}
+\newcommand{\rblr}{\ensuremath{R_{\mathrm{BLR}}}}
+\newcommand{\rkel}{{\emph R}}
+\newcommand{\rx}{{\emph R}\ensuremath{_{\mathrm{X}}}}
+\newcommand{\rnlr}{\ensuremath{R_{\mathrm{NLR}}}}
+\def\reference{\noindent\pp}
+\newcommand{\sers}{S{\'e}rsic}
+\newcommand{\subsamp}{\emph{s}}
+\newcommand{\sii}{[\ion{S}{2}]}
+\newcommand{\sig}{\ensuremath{\sigma}}
+\newcommand{\sigha}{\ensuremath{\sigma_{\mathrm{H\alpha}}}}
+\newcommand{\sigmastar}{\ensuremath{\sigma_{\ast}}}
+\newcommand{\sigmagas}{\ensuremath{\sigma_{\rm g}}}
+\newcommand{\sigoii}{\ensuremath{\sigma_{\mathrm{[O {\tiny II}]}}}}
+\newcommand{\sigoiii}{\ensuremath{\sigma_{\mathrm{[O {\tiny III}]}}}}
+\newcommand{\sigsii}{\ensuremath{\sigma_{\mathrm{[S {\tiny II}]}}}}
+\newcommand{\spitzer}{\emph{Spitzer}}
+\newcommand{\swift}{\emph{SWIFT}}
+\newcommand{\stis}{STIS}
+\newenvironment{smallrefs}{\Large}{\Huge}
+\newcommand{\sur}{$u-r$}
+\newcommand{\vc}{$v_\mathrm{c}$}
+\newcommand{\vvmax}{$V/V_{\rm max}$}
+\newcommand{\vmax}{$V_{\rm max}$}
+\newcommand{\xmm}{{\it XMM-Newton}}
+\newcommand{\whz}{W~Hz$^{-1}$}
+\newcommand{\zsun}{\ensuremath{Z_{\odot}}}
+\newcommand{\zw}{1~Zw~{\small I}}
+
+\def\lax{{$\mathrel{\hbox{\rlap{\hbox{\lower4pt\hbox{$\sim$}}}\hbox{$<$}}}$}}
+\def\gax{{$\mathrel{\hbox{\rlap{\hbox{\lower4pt\hbox{$\sim$}}}\hbox{$>$}}}$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bibliography
+
+\bibpunct[, ]{(}{)}{;}{a}{}{,}
+\renewcommand\bibname{References}
+\renewcommand\bibsection{\subsection*{\refname}}
+\let\oldthebibliography=\thebibliography
+\let\endoldthebibliography=\endthebibliography
+\renewenvironment{thebibliography}[1]{%
+  \begin{oldthebibliography}{#1}%
+% Make sure the references line gets into the contents table - note spacing!  
+    \addcontentsline{toc}{subsection}{\hspace{3em}References} 
+    \footnotesize
+    \setlength{\parskip}{0ex}%
+    \setlength{\itemsep}{0ex}%
+}%
+{%
+  \end{oldthebibliography}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Environments
+
+
+%%%%%%%%%%%%%%%%%% DISABLE UNTIL DEBUG SUCCEEDED
+\@ifundefined{renewstyles}{}{
+
+\renewenvironment{enumerate}
+  {\ifnum \@enumdepth >\thr@@\@toodeep\else
+   \advance\@enumdepth\@ne
+   \edef\@enumctr{enum\romannumeral\the\@enumdepth}%
+   \list{\csname label\@enumctr\endcsname}{%
+      \iftdir
+         \ifnum \@listdepth=\@ne \topsep.5\normalbaselineskip
+           \else\topsep\z@\fi
+         \labelwidth1zw \labelsep.3zw
+         \ifnum \@enumdepth=\@ne \leftmargin1zw\relax
+           \else\leftmargin\leftskip\fi
+         \advance\leftmargin 1zw
+      \fi
+         \parskip\z@ \itemsep\z@ \parsep\z@
+         \usecounter{\@enumctr}%
+         \def\makelabel##1{\hss\llap{##1}}}%
+   \fi}{\endlist}
+\renewenvironment{itemize}
+  {\ifnum \@itemdepth >\thr@@\@toodeep\else
+   \advance\@itemdepth\@ne
+   \edef\@itemitem{labelitem\romannumeral\the\@itemdepth}%
+   \expandafter
+   \list{\csname \@itemitem\endcsname}{%
+      \iftdir
+         \ifnum \@listdepth=\@ne \topsep.5\normalbaselineskip
+           \else\topsep\z@\fi
+         \labelwidth1zw \labelsep.3zw
+         \ifnum \@itemdepth =\@ne \leftmargin1zw\relax
+           \else\leftmargin\leftskip\fi
+         \advance\leftmargin 1zw
+      \fi
+         \parskip\z@ \itemsep\z@ \parsep\z@
+         \def\makelabel##1{\hss\llap{##1}}}%
+   \fi}{\endlist}
+\renewenvironment{description}
+  {\list{}{\labelwidth\z@ \itemindent-0.5\leftmargin
+   \iftdir
+     \leftmargin\leftskip \advance\leftmargin3\Cwd
+     \rightmargin\rightskip
+     \labelsep=1zw
+   \fi
+     \itemsep\z@
+     \listparindent\z@ \topskip\z@ \parskip\z@ \partopsep\z@
+           \let\makelabel\descriptionlabel}}{\endlist}
+
+%%%%% startsection
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
+   {0.4\Cvs \@plus.2\Cvs \@minus.2\Cvs}%
+   {- 1.5 \Cvs \@plus.2\Cvs \@minus.2\Cvs}%
+   {\reset@font\normalsize\bfseries}}
+\renewcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
+   {0.4\Cvs \@plus.2\Cvs \@minus.2\Cvs}%
+   {- 1.5 \Cvs \@plus.2\Cvs \@minus.2\Cvs}%
+   {\reset@font\normalsize\bfseries}}
+
+
+%%% col/subcol defs
+\newcommand{\@colname}{}       % column name
+\newcommand{\@subcolname}{}    % sub column name
+\newcounter{col}[section]
+\newcounter{subcol}[col]
+\renewcommand{\thecol}{\@alph\c@col}
+\renewcommand{\thesubcol}{\@alph\c@subcol}
+\newcommand{\set@colname}[1]{
+  \renewcommand{\@colname}{#1}
+  \set@subcolname{}
+}
+\newcommand{\set@subcolname}[1]{
+  \renewcommand{\@subcolname}{#1}
+}
+
+
+
+\newcommand{\col}{
+  \@afterindenttrue
+  \secdef\@col\@scol
+}
+\def\@col[#1]#2{
+  \set@colname{#2}
+  \@makecolhead{#2}
+  \@afterheading
+}
+\def\@makecolhead#1{
+  \hbox{}
+  {
+    \parindent\z@
+    \raggedright
+    \setbox0=\hbox{\reset@font\Large\bfseries #1}
+    \dimen0=\wd0
+    \ifdim \dimen0 > \linewidth  \relax
+      \vbox{
+        \hbox to \linewidth{
+          \reset@font\Large\bfseries #1\hfil
+        }
+      }
+    \else
+      \vbox{
+        \hbox to \linewidth{
+          \reset@font\Large\bfseries #1\hfil
+        }
+      }
+    \fi
+  }
+  \nopagebreak
+}
+\def\@scol#1{
+  \set@colname{#1}
+  \@makecolhead{#1}
+  \@afterheading
+}
+
+
+\newcommand{\subcol}{
+  \@afterindenttrue
+  \secdef\@subcol\@ssubcol
+}
+\def\@subcol[#1]#2{
+  \set@subcolname{#2}
+  \@makesubcolhead{#2}
+  \@afterheading
+}
+\def\@makesubcolhead#1{
+  \hbox{}
+  {
+    \parindent\z@
+    \raggedright
+    \setbox0=\hbox{\reset@font\large\bfseries #1}
+    \dimen0=\wd0
+    \ifdim \dimen0 > \linewidth  \relax
+      \vbox{
+        \hbox to \linewidth{
+          \reset@font\large\bfseries #1\hfil
+        }
+      }
+    \else
+      \vbox{
+        \hbox to \linewidth{
+          \reset@font\large\bfseries #1\hfil
+        }
+      }
+    \fi
+  }
+  \nopagebreak
+}
+\def\@ssubcol#1{
+  \set@subcolname{#1}
+  \@makesubcolhead{#1}
+  \@afterheading
+}
+
+
+\usepackage{makeidx}
+\newcommand{\Index}[2]{%
+\setbox0 = \hbox{#2}%
+\ifdim \wd0 > 0pt \relax
+#1\index{#2@#1}%
+\else%
+#1\index{#1}%
+\fi%
+}
+\newcommand{\indexnewletter}[1]{
+  \setbox0 = \hbox{\large #1}
+  \dimen1 = \columnwidth
+  \dimen0 = \ht0
+  \dimen2 = \dp0
+  \advance\dimen1 by -\wd0
+  \setbox1 = \hbox{\vbox{\box0}\vbox{\hfill\hrule height \dimen0 depth \dimen2 width \dimen1}}
+  \vbox{
+    \box1
+    \hrule width 0pt
+    \hrule height .5pt width \columnwidth
+  }
+}
+
+%%%%%%%%%%%%%%%% END OF \@ifundefined{renewstyles}
+}
+

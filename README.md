@@ -1,4 +1,7 @@
 pfs_misc
 ========
 
-Miscellaneous files
+mIscellaneous files
+
+* texsty : LaTeX style files
+

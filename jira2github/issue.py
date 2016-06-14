@@ -64,9 +64,9 @@ def IssueCreate(conf, opt):
     opts = { 'owner': opt[0], 'repo': opt[1] }
     url = InsertParameter(api_issue_create, opts)
     print url
-    body = ReadComment(opt[3])
-    if body:
-        print "Null comment body file: " + opt[3]
+    body = ReadComment(opt[4])
+    if not body:
+        print "Null comment body file: " + opt[4]
         return
     data = json.dumps({
             'title': opt[2],
